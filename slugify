@@ -87,6 +87,9 @@ for source in "$@"; do
   ## Initialize target
   target="$source"
 
+  ## Remove accented characters & clenup
+  target=$(echo "$target" | iconv -f utf8 -t ascii//TRANSLIT | sed "s/'//g" )
+
   ## Optionally convert to lowercase
   if [ $ignore_case -eq 0 ]; then
     target=$(echo "$target" | tr A-Z a-z )
